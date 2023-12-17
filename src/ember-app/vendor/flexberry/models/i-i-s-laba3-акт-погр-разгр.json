@@ -1,0 +1,42 @@
+﻿{
+  "name": "IISLaba3АктПогрРазгр",
+  "modelName": "i-i-s-laba3-акт-погр-разгр",
+  "className": "АктПогрРазгр",
+  "nameSpace": "IIS.Laba3",
+  "parentModelName": null,
+  "parentClassName": null,
+  "attrs": [
+    {
+      "name": "дата",
+      "type": "date",
+      "flexberryType": "DateTime",
+      "notNull": false,
+      "defaultValue": "",
+      "stored": true,
+      "ordered": false
+    },
+    {
+      "name": "тип",
+      "type": "i-i-s-laba3-тип-акта",
+      "flexberryType": "ТипАкта",
+      "notNull": false,
+      "defaultValue": "",
+      "stored": true,
+      "ordered": false
+    }
+  ],
+  "belongsTo": [
+    {
+      "polymorphic": false,
+      "presence": true,
+      "name": "сотрудники",
+      "relatedTo": "i-i-s-laba3-сотрудники",
+      "inverse": null
+    }
+  ],
+  "hasMany": [],
+  "projections": [],
+  "stored": true,
+  "offline": true,
+  "external": false
+}

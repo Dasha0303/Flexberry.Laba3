@@ -1,0 +1,8 @@
+﻿{
+  "nameSpace": "IIS.Laba3",
+  "className": "ТипАкта",
+  "enumObjects": {
+    "Разгрузка": "",
+    "Погрузка": ""
+  }
+}

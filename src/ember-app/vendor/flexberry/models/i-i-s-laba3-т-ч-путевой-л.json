@@ -1,0 +1,51 @@
+﻿{
+  "name": "IISLaba3ТЧПутевойЛ",
+  "modelName": "i-i-s-laba3-т-ч-путевой-л",
+  "className": "ТЧПутевойЛ",
+  "nameSpace": "IIS.Laba3",
+  "parentModelName": null,
+  "parentClassName": null,
+  "attrs": [
+    {
+      "name": "местоНазнач",
+      "type": "string",
+      "flexberryType": "string",
+      "notNull": false,
+      "defaultValue": "",
+      "stored": true,
+      "ordered": false
+    },
+    {
+      "name": "местоОтпр",
+      "type": "string",
+      "flexberryType": "string",
+      "notNull": false,
+      "defaultValue": "",
+      "stored": true,
+      "ordered": false
+    },
+    {
+      "name": "пРойденоКМ",
+      "type": "number",
+      "flexberryType": "int",
+      "notNull": false,
+      "defaultValue": "",
+      "stored": true,
+      "ordered": false
+    }
+  ],
+  "belongsTo": [
+    {
+      "polymorphic": false,
+      "presence": true,
+      "name": "путевойЛист",
+      "relatedTo": "i-i-s-laba3-путевой-лист",
+      "inverse": null
+    }
+  ],
+  "hasMany": [],
+  "projections": [],
+  "stored": true,
+  "offline": true,
+  "external": false
+}

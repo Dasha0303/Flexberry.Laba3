@@ -1,0 +1,1 @@
+docker-compose -p laba3 up -d

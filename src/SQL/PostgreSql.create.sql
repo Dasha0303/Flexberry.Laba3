@@ -1,0 +1,223 @@
+﻿
+
+
+
+
+CREATE TABLE АктПогрРазгр (
+ primaryKey UUID NOT NULL,
+ Дата TIMESTAMP(3) NULL,
+ Тип VARCHAR(9) NULL,
+ Сотрудники UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE ТЧАктПГ (
+ primaryKey UUID NOT NULL,
+ ВесТовараКонец DOUBLE PRECISION NULL,
+ ВремявПути DOUBLE PRECISION NULL,
+ ОтклоненияВеса VARCHAR(255) NULL,
+ МестоРазгрузки VARCHAR(255) NULL,
+ ВесТовараНачало DOUBLE PRECISION NULL,
+ МестоПогрузки VARCHAR(255) NULL,
+ АктПогрРазгр UUID NOT NULL,
+ Товар UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE Товар (
+ primaryKey UUID NOT NULL,
+ НаимТовара VARCHAR(255) NULL,
+ IDТовара INT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE Автомобили (
+ primaryKey UUID NOT NULL,
+ IDАвто INT NULL,
+ Марка VARCHAR(255) NULL,
+ ГосНомерАвто VARCHAR(255) NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE ЖурналСостТС (
+ primaryKey UUID NOT NULL,
+ Дата TIMESTAMP(3) NULL,
+ ПоказОдометра INT NULL,
+ Время INT NULL,
+ ВнешСостТС VARCHAR(255) NULL,
+ Автомобили UUID NOT NULL,
+ Сотрудники UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE ПутевойЛист (
+ primaryKey UUID NOT NULL,
+ Дата VARCHAR(255) NULL,
+ Сотрудники UUID NOT NULL,
+ Автомобили UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE ТЧПутевойЛ (
+ primaryKey UUID NOT NULL,
+ МестоНазнач VARCHAR(255) NULL,
+ ПРойденоКМ INT NULL,
+ МестоОтпр VARCHAR(255) NULL,
+ ПутевойЛист UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE Сотрудники (
+ primaryKey UUID NOT NULL,
+ Телефон INT NULL,
+ Удостоверение INT NULL,
+ IDСотрудника INT NULL,
+ ФИО VARCHAR(255) NULL,
+ Должности UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE Должности (
+ primaryKey UUID NOT NULL,
+ IDДолжности INT NULL,
+ НаимДолжности VARCHAR(255) NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE STORMNETLOCKDATA (
+ LockKey VARCHAR(300) NOT NULL,
+ UserName VARCHAR(300) NOT NULL,
+ LockDate TIMESTAMP(3) NULL,
+ PRIMARY KEY (LockKey));
+
+
+CREATE TABLE STORMSETTINGS (
+ primaryKey UUID NOT NULL,
+ Module VARCHAR(1000) NULL,
+ Name VARCHAR(255) NULL,
+ Value TEXT NULL,
+ "User" VARCHAR(255) NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE STORMAdvLimit (
+ primaryKey UUID NOT NULL,
+ "User" VARCHAR(255) NULL,
+ Published BOOLEAN NULL,
+ Module VARCHAR(255) NULL,
+ Name VARCHAR(255) NULL,
+ Value TEXT NULL,
+ HotKeyData INT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE STORMFILTERSETTING (
+ primaryKey UUID NOT NULL,
+ Name VARCHAR(255) NOT NULL,
+ DataObjectView VARCHAR(255) NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE STORMWEBSEARCH (
+ primaryKey UUID NOT NULL,
+ Name VARCHAR(255) NOT NULL,
+ "Order" INT NOT NULL,
+ PresentView VARCHAR(255) NOT NULL,
+ DetailedView VARCHAR(255) NOT NULL,
+ FilterSetting_m0 UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE STORMFILTERDETAIL (
+ primaryKey UUID NOT NULL,
+ Caption VARCHAR(255) NOT NULL,
+ DataObjectView VARCHAR(255) NOT NULL,
+ ConnectMasterProp VARCHAR(255) NOT NULL,
+ OwnerConnectProp VARCHAR(255) NULL,
+ FilterSetting_m0 UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE STORMFILTERLOOKUP (
+ primaryKey UUID NOT NULL,
+ DataObjectType VARCHAR(255) NOT NULL,
+ Container VARCHAR(255) NULL,
+ ContainerTag VARCHAR(255) NULL,
+ FieldsToView VARCHAR(255) NULL,
+ FilterSetting_m0 UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE UserSetting (
+ primaryKey UUID NOT NULL,
+ AppName VARCHAR(256) NULL,
+ UserName VARCHAR(512) NULL,
+ UserGuid UUID NULL,
+ ModuleName VARCHAR(1024) NULL,
+ ModuleGuid UUID NULL,
+ SettName VARCHAR(256) NULL,
+ SettGuid UUID NULL,
+ SettLastAccessTime TIMESTAMP(3) NULL,
+ StrVal VARCHAR(256) NULL,
+ TxtVal TEXT NULL,
+ IntVal INT NULL,
+ BoolVal BOOLEAN NULL,
+ GuidVal UUID NULL,
+ DecimalVal DECIMAL(20,10) NULL,
+ DateTimeVal TIMESTAMP(3) NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE ApplicationLog (
+ primaryKey UUID NOT NULL,
+ Category VARCHAR(64) NULL,
+ EventId INT NULL,
+ Priority INT NULL,
+ Severity VARCHAR(32) NULL,
+ Title VARCHAR(256) NULL,
+ Timestamp TIMESTAMP(3) NULL,
+ MachineName VARCHAR(32) NULL,
+ AppDomainName VARCHAR(512) NULL,
+ ProcessId VARCHAR(256) NULL,
+ ProcessName VARCHAR(512) NULL,
+ ThreadName VARCHAR(512) NULL,
+ Win32ThreadId VARCHAR(128) NULL,
+ Message VARCHAR(2500) NULL,
+ FormattedMessage TEXT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+
+ ALTER TABLE АктПогрРазгр ADD CONSTRAINT FK22d8878b2837fd658dd742dd9a89d66c4a9a881f FOREIGN KEY (Сотрудники) REFERENCES Сотрудники; 
+CREATE INDEX Index22d8878b2837fd658dd742dd9a89d66c4a9a881f on АктПогрРазгр (Сотрудники); 
+
+ ALTER TABLE ТЧАктПГ ADD CONSTRAINT FKc3a7e08e43b99c4586e165a467a7b7d4f38b9b48 FOREIGN KEY (АктПогрРазгр) REFERENCES АктПогрРазгр; 
+CREATE INDEX Indexc3a7e08e43b99c4586e165a467a7b7d4f38b9b48 on ТЧАктПГ (АктПогрРазгр); 
+
+ ALTER TABLE ТЧАктПГ ADD CONSTRAINT FK5ccf4817378646cdd976346ec894fc343dc75d72 FOREIGN KEY (Товар) REFERENCES Товар; 
+CREATE INDEX Index5ccf4817378646cdd976346ec894fc343dc75d72 on ТЧАктПГ (Товар); 
+
+ ALTER TABLE ЖурналСостТС ADD CONSTRAINT FKa02920ceb69f1ae1be4dde4f497a03cd89ea1720 FOREIGN KEY (Автомобили) REFERENCES Автомобили; 
+CREATE INDEX Indexa02920ceb69f1ae1be4dde4f497a03cd89ea1720 on ЖурналСостТС (Автомобили); 
+
+ ALTER TABLE ЖурналСостТС ADD CONSTRAINT FK47b0dae28339b281492269f630721d31ad72762b FOREIGN KEY (Сотрудники) REFERENCES Сотрудники; 
+CREATE INDEX Index47b0dae28339b281492269f630721d31ad72762b on ЖурналСостТС (Сотрудники); 
+
+ ALTER TABLE ПутевойЛист ADD CONSTRAINT FK356ce31e679a598cc7c123b048b42c717370dde2 FOREIGN KEY (Сотрудники) REFERENCES Сотрудники; 
+CREATE INDEX Index356ce31e679a598cc7c123b048b42c717370dde2 on ПутевойЛист (Сотрудники); 
+
+ ALTER TABLE ПутевойЛист ADD CONSTRAINT FKea4f8f1eae576cc35ea51ee3138c884d7ef9910b FOREIGN KEY (Автомобили) REFERENCES Автомобили; 
+CREATE INDEX Indexea4f8f1eae576cc35ea51ee3138c884d7ef9910b on ПутевойЛист (Автомобили); 
+
+ ALTER TABLE ТЧПутевойЛ ADD CONSTRAINT FKe464497cb573f4444d86597c60a119b71c6071e4 FOREIGN KEY (ПутевойЛист) REFERENCES ПутевойЛист; 
+CREATE INDEX Indexe464497cb573f4444d86597c60a119b71c6071e4 on ТЧПутевойЛ (ПутевойЛист); 
+
+ ALTER TABLE Сотрудники ADD CONSTRAINT FKe5ecf5036053539899cbfb65cf7383292844b1ec FOREIGN KEY (Должности) REFERENCES Должности; 
+CREATE INDEX Indexe5ecf5036053539899cbfb65cf7383292844b1ec on Сотрудники (Должности); 
+
+ ALTER TABLE STORMWEBSEARCH ADD CONSTRAINT FKc4378e39870eb056aec84088683297a01d2a6200 FOREIGN KEY (FilterSetting_m0) REFERENCES STORMFILTERSETTING; 
+
+ ALTER TABLE STORMFILTERDETAIL ADD CONSTRAINT FK921d16269835017e2a0d0e29ad6fb175454a70d0 FOREIGN KEY (FilterSetting_m0) REFERENCES STORMFILTERSETTING; 
+
+ ALTER TABLE STORMFILTERLOOKUP ADD CONSTRAINT FKce38ef0db3f01a53acaa49fed8853fb941ad47ba FOREIGN KEY (FilterSetting_m0) REFERENCES STORMFILTERSETTING; 
+
