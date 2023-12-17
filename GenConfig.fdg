@@ -16,8 +16,7 @@
         "Build": false,
         "GitClone": false,
         "GitPush": false,
-        "GhPagesPush": true,
-        "EmberMetadata": false
+        "GhPagesPush": true
       },
       "ApacheCordova": {
         "CordovaProject": false,
@@ -39,7 +38,6 @@
       "Mssql": {
         "DiffSql": false,
         "FullSql": true,
-        "LiquibaseSql": false,
         "Security": false,
         "AdminUser": false,
         "ConnectionString": null
@@ -47,7 +45,6 @@
       "PostgreSql": {
         "DiffSql": false,
         "FullSql": true,
-        "LiquibaseSql": false,
         "Security": false,
         "AdminUser": false,
         "ConnectionString": null
@@ -74,9 +71,7 @@
     },
     "Metadata": {
       "Crp": false,
-      "Json": false,
-      "Jdl": false,
-      "PlantUML": false
+      "Json": false
     }
   }
 }
